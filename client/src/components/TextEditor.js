@@ -1,14 +1,16 @@
 import React, { useCallback } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
+import '../scss/styles.scss';
 
 const TextEditor = () => {
   const wrapperRef = useCallback(wrapper => {
-    if (wrapper === null) return
+    if (wrapper === null) return;
 
-		wrapper.innerHTML = ''
-		const editor = document.createElement('div');
+    wrapper.innerHTML = '';
+    const editor = document.createElement('div');
     wrapper.append(editor);
+
     new Quill(editor, {
       theme: 'snow'
     });

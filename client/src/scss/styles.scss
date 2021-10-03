@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: rgb(248, 247, 245);
+
+  @media print {
+    background-color: none;
+  }
+}
+
+.ql {
+  &-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(246, 248, 242);
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    border: none;
+
+    @media print {
+      display: none;
+    }
+  }
+
+  &-container {
+    &.ql-snow {
+      border: none;
+      display: flex;
+      justify-content: center;
+    }
+    .ql-editor {
+      width: 8.5in;
+      min-height: 11in;
+      background-color: white;
+      margin: 1rem;
+      padding: 0.5in;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+      @media print {
+        width: 6.5in;
+        min-height: 9in;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        align-self: flex-start;
+        border: none;
+      }
+    }
+  }
+}
+
+@page {
+  margin: 1in;
+}
