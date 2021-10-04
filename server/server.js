@@ -1,12 +1,17 @@
 const io = require('socket.io')(3001, {
 	cors: {
-		origin: 'http://localhost:3000',
-		methods: ['GET', 'POST']
+				methods: ['GET', 'POST']
 	}
 })
 
 io.on('connection', socket => {
-	socket.on('send-changes', delta => {
-		socket.broadcast.emit('receive-changes', delta)
+	socket.on('get-document', documentId => {
+		socket.join(documentId)
+		const data = ''
+		socket.emit('load-document', data)
+	
+		socket.on('send-changes', delta => {
+			socket.to(documentId).emit('receive-changes', delta)
+		})
 	})
 })
