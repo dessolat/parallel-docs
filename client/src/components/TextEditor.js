@@ -23,17 +23,6 @@ const TextEditor = () => {
   const { id: documentId } = useParams();
 
   useEffect(() => {
-		if (socket == null || quill == null) return
-
-		socket.emit('get-document', documentId)
-
-		socket.once('load-document', document => {
-			quill.setContents(document)
-			quill.enable()
-		})
-	}, [socket, quill, documentId]);
-
-  useEffect(() => {
     setSocket(io('http://localhost:3001'));
 
     return () => {
@@ -41,6 +30,29 @@ const TextEditor = () => {
     };
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (socket == null || quill == null) return;
+
+    socket.emit('get-document', documentId);
+
+    socket.once('load-document', document => {
+      quill.setContents(document);
+      quill.enable();
+    });
+  }, [socket, quill, documentId]);
+
+  useEffect(() => {
+    if (socket == null || quill == null) return;
+
+    const interval = setInterval(() => {
+      socket.emit('save', quill.getContents());
+    }, 1500);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [socket, quill]);
 
   useEffect(() => {
     if (socket == null || quill == null) return;
