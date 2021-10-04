@@ -8,6 +8,7 @@
 
 html {
   font-size: 16px;
+	--speed: .4s;
 }
 
 body {
@@ -25,6 +26,7 @@ body {
     z-index: 1;
     display: flex;
     justify-content: center;
+		flex-wrap: wrap;
     background-color: rgb(246, 248, 242);
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
     border: none;
@@ -63,4 +65,78 @@ body {
 
 @page {
   margin: 1in;
+}
+
+.buttons-wrapper {
+	position: fixed;
+	left: -5px;
+	top: 50px;
+	z-index: 2;
+	border-radius: 5px;
+	font-family: monospace;
+	font-size: 1rem;
+	padding: 10px;
+	opacity: .3;
+	width: 48px;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+	transition: all var(--speed);
+
+	
+	@media (max-width: 750px) {
+		top: 72px;
+	}
+
+	@media (max-width: 420px) {
+		top: 96px;
+	}
+
+	&:hover {
+		width: 145px;
+		opacity: 1;
+		background-color: white;
+
+		.btn {
+			color: black;
+		}
+	}
+}
+
+.btn {
+	border: none;
+	cursor: pointer;
+	width: 92px;
+	height: 32px;
+	position: relative;
+	color: transparent;
+	margin-left: 30px;
+	background-color: transparent;
+	transition: all var(--speed);
+	text-align: start;
+
+	&:hover {
+		transform: translateX(5px);
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		left: -32px;
+		width: 32px;
+		height: 32px;
+		top: 0;
+	}
+	
+	+ .btn {
+		margin-top: 10px;
+	}
+}
+
+.link-btn::before {
+	background: url('../icons/link.png') center/cover;
+	width: 28px;
+	height: 28px;
+}
+.new-btn::before {
+	background: url('../icons/add-doc.png') center/cover;
 }
